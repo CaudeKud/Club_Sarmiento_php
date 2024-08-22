@@ -1,7 +1,8 @@
 # Club_Sarmiento_php
 Proyecto de Gestion ABM de Socios, Disciplinas, Pagos y Reportes
 
-
+- El Proyecto se encuentra alojado en la rama Maestro de GitHub.
+- El Archivo de Creacion de la Base de Datos se encuentra alojado en un .txt en el Readme de la misma rama 
 
 Club Sarmiento - Sistema de Gestión
 Este proyecto es un sistema de gestión para un club deportivo, que permite administrar socios, disciplinas y pagos, así como generar reportes y gráficos basados en los datos almacenados. La aplicación está construida utilizando PHP, MySQL, Bootstrap, Animate.css, y otras tecnologías web.
