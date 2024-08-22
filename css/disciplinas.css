@@ -1,0 +1,74 @@
+body {
+  background-image: url(../IMG/fondolegal.jpg);
+  background-size: cover;
+  background-position: center;
+  color: white;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.fcc-btn,
+.fcc-btn-alt {
+  padding: 5px 10px;
+  font-size: 14px;
+  display: inline-block;
+  text-decoration: none;
+  border-radius: 5px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.fcc-btn {
+  background-color: #199319;
+  color: white;
+}
+
+.fcc-btn:hover {
+  background-color: #223094;
+  transform: translateY(-2px);
+}
+
+.fcc-btn-alt {
+  background-color: #c82333;
+  color: white;
+}
+
+.fcc-btn-alt:hover {
+  background-color: #a71d2a;
+  transform: translateY(-2px);
+}
+
+.table {
+  color: white;
+}
+
+.table thead {
+  background-color: #343a40;
+}
+
+.table td,
+.table th {
+  vertical-align: middle;
+}
+
+.mensaje-confirmacion {
+  font-size: 1.5rem;
+  color: green;
+  margin-top: 20px;
+  text-align: center;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
