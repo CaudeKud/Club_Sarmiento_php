@@ -1,0 +1,413 @@
+-- Descargar el siguiente archivo y ejecutar en -php my admin como consulta de se Sql el mismo genera la base de datos correspondiente para su funcionamiento
+
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 22-08-2024 a las 16:16:02
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `sarmiento`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `disciplinas`
+--
+
+CREATE TABLE `disciplinas` (
+  `id_disciplina` int(10) NOT NULL,
+  `disciplina` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `disciplinas`
+--
+
+INSERT INTO `disciplinas` (`id_disciplina`, `disciplina`) VALUES
+(1, 'Boxeo'),
+(2, 'Patin'),
+(3, 'Basquet'),
+(7, 'Golf');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pagos`
+--
+
+CREATE TABLE `pagos` (
+  `id` int(11) NOT NULL,
+  `id_socio` int(11) DEFAULT NULL,
+  `id_disciplina` int(11) DEFAULT NULL,
+  `fecha_pago` date DEFAULT NULL,
+  `monto` decimal(10,2) DEFAULT NULL,
+  `tipo_pago` enum('cuota_social','cuota_deportiva') NOT NULL,
+  `estado` enum('Pagado','Pendiente') DEFAULT 'Pendiente'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `pagos`
+--
+
+INSERT INTO `pagos` (`id`, `id_socio`, `id_disciplina`, `fecha_pago`, `monto`, `tipo_pago`, `estado`) VALUES
+(1, 11912, 1, '2024-07-15', 100.00, 'cuota_social', 'Pagado'),
+(2, 61259, 2, '2024-07-10', 200.00, 'cuota_deportiva', 'Pagado'),
+(3, 62731, 3, '2024-06-25', 100.00, 'cuota_social', 'Pagado'),
+(4, 68560, 7, '2024-08-01', 200.00, 'cuota_deportiva', 'Pagado'),
+(5, 69966, 1, '2024-07-20', 100.00, 'cuota_social', 'Pagado'),
+(6, 72690, 2, '2024-06-30', 200.00, 'cuota_deportiva', 'Pagado'),
+(7, 75968, 3, '2024-07-05', 100.00, 'cuota_social', 'Pagado'),
+(8, 80565, 7, '2024-07-25', 200.00, 'cuota_deportiva', 'Pagado'),
+(13, 11912, 2, '2024-08-21', 1200.00, 'cuota_social', 'Pagado'),
+(14, 11912, 1, '2024-08-14', 100.00, 'cuota_social', 'Pagado'),
+(15, 11912, 1, '2024-08-20', 100.00, 'cuota_social', 'Pagado'),
+(16, 11912, 1, '2024-08-22', 100.00, 'cuota_social', 'Pagado'),
+(17, 11912, 1, '2024-08-20', 100.00, 'cuota_social', 'Pagado'),
+(18, 11912, 1, '2024-08-15', 100.00, 'cuota_social', 'Pagado'),
+(19, 11912, 1, '2024-08-14', 100.00, 'cuota_social', 'Pagado'),
+(20, 80565, 1, '2024-08-21', 100.00, 'cuota_social', 'Pagado'),
+(21, 80565, 1, '2024-08-22', 150.00, 'cuota_deportiva', 'Pagado'),
+(23, 11912, 1, '2024-08-20', 10000.00, 'cuota_social', 'Pagado'),
+(25, 61259, 1, '2024-08-21', 100.00, 'cuota_social', 'Pagado'),
+(26, 998743, 1, '2024-08-22', 100.00, 'cuota_social', 'Pagado'),
+(27, 998743, 1, '2024-08-20', 100.00, 'cuota_social', 'Pagado'),
+(28, 998743, 1, '2024-08-22', 100.00, 'cuota_social', 'Pagado'),
+(29, 11912, 1, '2024-08-29', 100.00, 'cuota_social', 'Pagado'),
+(30, 61259, 1, '2024-08-20', 10000.00, 'cuota_social', 'Pagado'),
+(31, 11912, 1, '2024-08-21', 15000.00, 'cuota_deportiva', 'Pagado'),
+(32, 11912, 1, '2024-08-06', 15000.00, 'cuota_deportiva', 'Pagado'),
+(33, 61259, 2, '2024-08-21', 10000.00, 'cuota_social', 'Pagado'),
+(34, 61259, 2, '2024-08-21', 15000.00, 'cuota_deportiva', 'Pagado'),
+(35, 80565, 2, '2024-08-21', 15000.00, 'cuota_deportiva', 'Pagado');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `socios`
+--
+
+CREATE TABLE `socios` (
+  `SocioID` int(11) NOT NULL,
+  `Nombre` varchar(100) NOT NULL,
+  `Apellido` varchar(100) NOT NULL,
+  `FechaNacimiento` date DEFAULT NULL,
+  `Edad` int(11) DEFAULT NULL,
+  `DNI` decimal(10,0) NOT NULL,
+  `Telefono` decimal(10,0) DEFAULT NULL,
+  `Direccion` varchar(200) DEFAULT NULL,
+  `Mail` varchar(100) DEFAULT NULL,
+  `Foto` varchar(100) DEFAULT NULL,
+  `ContactoFamiliar` varchar(100) DEFAULT NULL,
+  `TelefonoFamiliar` decimal(10,0) DEFAULT NULL,
+  `CategoriaID` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `socios`
+--
+
+INSERT INTO `socios` (`SocioID`, `Nombre`, `Apellido`, `FechaNacimiento`, `Edad`, `DNI`, `Telefono`, `Direccion`, `Mail`, `Foto`, `ContactoFamiliar`, `TelefonoFamiliar`, `CategoriaID`) VALUES
+(11912, 'Lore', 'Kahn', '1971-05-20', 48, 9019555966, 5413246367, '465 Ronald Regan Way', 'klamasi@hao123.com', '', 'Kamila Lamas', 6839385457, 16),
+(61259, 'Ealasaid', 'Zupa', '1926-03-11', 33, 3634439998, 9889845126, '96 Rieder Place', 'ezupa41@google.es', '', 'Ealasaid Zupa', 3328758225, 12),
+(62731, 'Sella', 'Minear', '1902-04-22', 75, 4996770494, 3476780505, '8948 Butternut Junction', 'sminear24@mozilla.org', '', 'Sella Minear', 4417571299, 16),
+(68560, 'Giustina', 'Garbert', '1941-12-28', 6, 9371646797, 1657897488, '6980 Sage Junction', 'ggarbert2b@about.me', '', 'Giustina Garbert', 8543484197, 4),
+(69966, 'Myer', 'Barefoot', '1923-11-21', 28, 6767362861, 6866486642, '6 Mesta Place', 'mbarefoot5a@chronoengine.com', '', 'Myer Barefoot', 6203084403, 11),
+(72690, 'Dulci', 'Chace', '1939-10-11', 53, 2691711150, 3064564411, '28019 Porter Street', 'dchacez@cnn.com', '', 'Dulci Chace', 2984282126, 14),
+(75968, 'Sheppard', 'Bertomieu', '1935-09-15', 21, 1773677856, 7725902156, '728 Chive Avenue', 'sbertomieu5g@berkeley.edu', '', 'Sheppard Bertomieu', 4692104222, 15),
+(80565, 'Daphna', 'Nixon', '1907-08-20', 9, 5121155940, 8017745257, '0751 Nelson Junction', 'dnixon50@census.gov', '', 'Daphna Nixon', 2159990475, 16),
+(81562, 'Querida', 'Rraundl', '1909-08-10', 46, 9003702973, 5229074030, '9 Arrowood Junction', 'qrraundl5e@census.gov', '', 'Querida Rraundl', 4408569268, 9),
+(81746, 'Robinette', 'Leverett', '1937-04-20', 55, 4376236586, 6181520300, '1 Manitowish Junction', 'rleverett4i@yahoo.com', '', 'Robinette Leverett', 9342577736, 15),
+(92346, 'Ad', 'McDonnell', '1922-02-04', 25, 8348841633, 4968279237, '29265 Anhalt Avenue', 'amcdonnell1e@pcworld.com', '', 'Ad McDonnell', 1328438766, 16),
+(96331, 'Norina', 'Doumerque', '1900-07-22', 69, 7423325551, 5085208199, '5828 Northfield Pass', 'ndoumerque3y@un.org', '', 'Norina Doumerque', 6808850629, 11),
+(98659, 'Townsend', 'Leaman', '1976-09-12', 45, 8115054168, 5617713091, '18 Grayhawk Avenue', 'tleaman3u@msu.edu', '', 'Townsend Leaman', 6919858925, 8),
+(104862, 'Ashton', 'Petrashov', '1928-12-22', 73, 5911554074, 8247324787, '0 2nd Crossing', 'apetrashov46@webmd.com', '', 'Ashton Petrashov', 5234116066, 14),
+(107459, 'Jordan', 'Carlyle', '1900-06-04', 57, 1748928002, 3057471033, '890 Monterey Drive', 'jcarlyle4y@msu.edu', '', 'Jordan Carlyle', 1171670564, 19),
+(113813, 'Orelia', 'Cruess', '1931-09-11', 72, 8297793384, 4722959223, '5 Lyons Avenue', 'ocruess47@goodreads.com', '', 'Orelia Cruess', 7722854206, 12),
+(116182, 'Kaela', 'Pinnick', '1920-03-02', 75, 1721437199, 8903481616, '30949 Vernon Avenue', 'kpinnick2j@walmart.com', '', 'Kaela Pinnick', 3449220110, 7),
+(120050, 'Dawn', 'Gervaise', '1934-01-27', 62, 9621584820, 6969752598, '56 Lakewood Gardens Avenue', 'dgervaise2x@goo.ne.jp', '', 'Dawn Gervaise', 9066419852, 12),
+(124567, 'Bradney', 'Jewise', '1937-07-26', 42, 1004517005, 3479539958, '3452 Bellgrove Street', 'bjewise3m@xinhuanet.com', '', 'Bradney Jewise', 6567595072, 13),
+(135114, 'Alfonso', 'Coghlan', '1948-12-29', 69, 6931667208, 1792862050, '3532 Bunting Way', 'acoghlan58@theatlantic.com', '', 'Alfonso Coghlan', 7954676730, 6),
+(136924, 'Guss', 'Dumphries', '1925-12-22', 40, 7534731768, 7681868819, '6077 Pond Crossing', 'gdumphries2g@istockphoto.com', '', 'Guss Dumphries', 4553756079, 15),
+(148413, 'Clari', 'Bakewell', '1972-06-28', 18, 5406941377, 7962395053, '1663 Stephen Hill', 'cbakewell1t@issuu.com', '', 'Clari Bakewell', 5103886971, 19),
+(159674, 'Pascal', 'MacRonald', '1922-06-24', 43, 9103566147, 2924025057, '81168 Oak Valley Pass', 'pmacronald4f@army.mil', '', 'Pascal MacRonald', 7093779947, 11),
+(164510, 'Merrilee', 'Ivchenko', '1937-08-25', 21, 5981940018, 5907137743, '49 Cascade Hill', 'mivchenkom@newsvine.com', '', 'Merrilee Ivchenko', 7665482229, 19),
+(166266, 'Tammy', 'McCoy', '1919-02-05', 34, 6306180527, 7059303335, '46 Lunder Drive', 'tmccoy1r@webeden.co.uk', '', 'Tammy McCoy', 1731953997, 17),
+(170232, 'Kinsley', 'McMenamy', '1969-10-18', 42, 8087805910, 9343172221, '9 Waxwing Drive', 'kmcmenamy4e@utexas.edu', '', 'Kinsley McMenamy', 3311111563, 9),
+(172205, 'Sherry', 'Chestney', '1909-11-14', 22, 3841268721, 4068676654, '4 Alpine Street', 'schestney10@columbia.edu', '', 'Sherry Chestney', 5044192996, 6),
+(177849, 'Keely', 'Chessun', '1952-09-08', 41, 5839173243, 6447272752, '50607 Montana Place', 'kchessun2c@sourceforge.net', '', 'Keely Chessun', 4499139599, 9),
+(180351, 'Norbie', 'Slateford', '1948-08-19', 12, 3796964899, 5653164306, '3392 Annamark Plaza', 'nslateford1x@merriam-webster.com', '', 'Norbie Slateford', 8783359613, 20),
+(182215, 'Sancho', 'Grewe', '1914-05-17', 7, 7881621314, 5343276479, '7 Oakridge Junction', 'sgrewe2v@imdb.com', '', 'Sancho Grewe', 1793078206, 5),
+(182648, 'Benjamen', 'Costard', '1945-03-16', 18, 9044520082, 2168849744, '43608 Susan Place', 'bcostard5f@jugem.jp', '', 'Benjamen Costard', 6584152199, 20),
+(189403, 'Andre', 'Dudeney', '1958-11-22', 63, 9988074245, 3975954107, '3 Algoma Alley', 'adudeney2s@epa.gov', '', 'Andre Dudeney', 5954912511, 10),
+(189985, 'Sara', 'Furmenger', '1964-06-10', 68, 3609750878, 1281977124, '4744 Dunning Drive', 'sfurmenger3r@google.it', '', 'Sara Furmenger', 3833090584, 13),
+(196188, 'Buckie', 'Carbin', '1949-01-29', 56, 2122775770, 5666263948, '832 Knutson Park', 'bcarbin3p@netvibes.com', '', 'Buckie Carbin', 3685510733, 6),
+(197099, 'Cookie', 'Pettwood', '1971-10-14', 9, 9318240349, 5679719948, '688 Oriole Park', 'cpettwood6@nba.com', '', 'Cookie Pettwood', 1145717181, 14),
+(203710, 'Lilian', 'Keson', '1940-11-06', 78, 9849595271, 3462010457, '1933 Warner Place', 'lkeson3w@google.com.hk', '', 'Lilian Keson', 1229912432, 10),
+(204878, 'Edin', 'Blackbourn', '1914-03-17', 50, 7173159627, 6141840639, '02 Hudson Court', 'eblackbourn56@jigsy.com', '', 'Edin Blackbourn', 9842905271, 17),
+(215626, 'Belvia', 'Cromley', '1951-05-25', 24, 6793625561, 9515819168, '512 Center Junction', 'bcromley32@edublogs.org', '', 'Belvia Cromley', 8211476473, 7),
+(217173, 'Vincents', 'Haslin', '1966-11-05', 58, 6389380998, 1522127352, '1002 Katie Street', 'vhaslin4c@hibu.com', '', 'Vincents Haslin', 2249195130, 9),
+(221214, 'Jewel', 'Morando', '1936-11-27', 67, 3424542273, 9336005820, '09576 Moland Crossing', 'jmorando14@jiathis.com', '', 'Jewel Morando', 9631866037, 12),
+(227324, 'Saree', 'Iddy', '1915-06-27', 27, 9715267911, 5594951500, '61078 Katie Way', 'siddy2l@wisc.edu', '', 'Saree Iddy', 4092966097, 13),
+(233381, 'Elyse', 'Bonwick', '1927-11-01', 68, 5923014742, 1721727897, '0 Mockingbird Place', 'ebonwick12@vk.com', '', 'Elyse Bonwick', 4751266415, 3),
+(234867, 'Mallorie', 'Kliche', '1913-10-30', 75, 8384663446, 8661988995, '3685 Calypso Street', 'mkliche4a@cpanel.net', '', 'Mallorie Kliche', 7018608709, 5),
+(237448, 'Clemmie', 'Rowell', '1905-02-03', 53, 2031317822, 6787207738, '64111 Valley Edge Crossing', 'crowell1a@tamu.edu', '', 'Clemmie Rowell', 2572579301, 15),
+(246454, 'Ransom', 'Boak', '1936-04-23', 59, 8032538727, 9162345317, '7137 Hollow Ridge Drive', 'rboak18@uiuc.edu', '', 'Ransom Boak', 8583668929, 6),
+(251881, 'Bernice', 'Gherarducci', '1976-08-03', 68, 6001048635, 9953378273, '4329 Mccormick Pass', 'bgherarducci54@nih.gov', '', 'Bernice Gherarducci', 2294996738, 7),
+(266046, 'Martino', 'Loveard', '1937-11-28', 21, 4102819687, 2338895003, '469 Basil Street', 'mloveard22@home.pl', '', 'Martino Loveard', 3927662323, 8),
+(267594, 'Hendrick', 'Mollitt', '1955-08-07', 50, 9701300687, 2444564986, '44778 Maryland Point', 'hmollitt1c@blogger.com', '', 'Hendrick Mollitt', 7718567572, 8),
+(278605, 'Debora', 'Nice', '1903-11-20', 9, 4405650127, 9965107848, '145 Graedel Lane', 'dnice1q@si.edu', '', 'Debora Nice', 1408243707, 20),
+(283287, 'Adel', 'Duckerin', '1947-10-01', 62, 3951637386, 7344313979, '7 Harbort Parkway', 'aduckerin3l@vk.com', '', 'Adel Duckerin', 9326515828, 6),
+(287205, 'Phedra', 'Reddy', '1964-12-03', 27, 3868729741, 9617064792, '09 Veith Place', 'preddy42@npr.org', '', 'Phedra Reddy', 7664840656, 13),
+(294792, 'Allayne', 'Pendlenton', '1937-06-27', 46, 8666183848, 6757108889, '67815 Jana Place', 'apendlenton59@rambler.ru', '', 'Allayne Pendlenton', 3046796285, 11),
+(299869, 'Aguste', 'Folliss', '1962-03-23', 80, 6649510696, 5521712850, '128 Waxwing Point', 'afolliss51@pen.io', '', 'Aguste Folliss', 5152195307, 19),
+(307955, 'Chalmers', 'Giblin', '1969-12-27', 12, 2674497020, 7126414595, '90 Birchwood Center', 'cgiblinu@hostgator.com', '', 'Chalmers Giblin', 9525981228, 9),
+(323239, 'Osbourne', 'Heape', '1943-11-08', 27, 5296670181, 2723725494, '0 Melby Plaza', 'oheapef@sbwire.com', '', 'Osbourne Heape', 8564855681, 6),
+(328078, 'Vonnie', 'Benfell', '1925-10-04', 58, 6112014875, 5107498295, '899 Lunder Alley', 'vbenfell2m@flickr.com', '', 'Vonnie Benfell', 7342251721, 4),
+(332953, 'Chevy', 'Melly', '1972-02-20', 75, 4719957903, 3292524900, '615 Forest Dale Court', 'cmelly25@senate.gov', '', 'Chevy Melly', 1116462389, 3),
+(338065, 'Karlotta', 'Teresse', '1978-11-07', 41, 7917919148, 7839338546, '580 Dakota Street', 'kteresse1w@fda.gov', '', 'Karlotta Teresse', 2079586751, 11),
+(341500, 'Cameron', 'Durning', '1914-11-20', 33, 1271138566, 5993170845, '1 Buhler Road', 'cdurning4p@nih.gov', '', 'Cameron Durning', 4939855931, 9),
+(345753, 'Cris', 'Lysaght', '1959-06-06', 15, 4975498590, 9838711324, '4 Spenser Place', 'clysaght5h@intel.com', '', 'Cris Lysaght', 5052192653, 19),
+(352670, 'Gisela', 'Stanney', '1933-04-27', 10, 7579863044, 6843143142, '505 Orin Junction', 'gstanney0@sakura.ne.jp', '', 'Gisela Stanney', 4868237811, 6),
+(353213, 'Jessalin', 'Grayston', '1969-12-27', 7, 8234733371, 7624784393, '2800 Fordem Lane', 'jgrayston29@cmu.edu', '', 'Jessalin Grayston', 1439150478, 14),
+(359232, 'Mannie', 'Raistrick', '1971-10-30', 9, 3839648755, 2336615555, '20399 Burning Wood Pass', 'mraistrick52@xing.com', '', 'Mannie Raistrick', 5907243914, 11),
+(359750, 'Dee', 'Hewins', '1914-01-20', 80, 3371202132, 2835970446, '50685 Thackeray Alley', 'dhewins53@ucla.edu', '', 'Dee Hewins', 7001765799, 9),
+(362852, 'Enos', 'Morot', '1952-03-18', 57, 6295867013, 6374241795, '66212 Bultman Plaza', 'emorot2o@huffingtonpost.com', '', 'Enos Morot', 7481196153, 6),
+(380007, 'Rey', 'Myderscough', '1911-09-10', 27, 6267056708, 6878703131, '8237 Summer Ridge Parkway', 'rmyderscough4n@exblog.jp', '', 'Rey Myderscough', 5426986277, 8),
+(380830, 'Drake', 'MacDougall', '1971-05-22', 15, 3313189917, 6293193051, '331 Kings Parkway', 'dmacdougall4h@imgur.com', '', 'Drake MacDougall', 7231451054, 12),
+(385188, 'Cori', 'Lineen', '1924-11-12', 31, 4482208699, 3405427554, '3428 Rockefeller Center', 'clineen4u@hatena.ne.jp', '', 'Cori Lineen', 7159427406, 10),
+(398582, 'Keefe', 'Dorward', '1959-11-13', 10, 9768889319, 3914395332, '046 Fairfield Avenue', 'kdorward1m@reuters.com', '', 'Keefe Dorward', 7552296522, 18),
+(407964, 'Westleigh', 'Rubury', '1949-01-22', 40, 9555610639, 1355003097, '0 Fremont Drive', 'wrubury55@springer.com', '', 'Westleigh Rubury', 6692057349, 18),
+(411885, 'Arly', 'Soreau', '1905-01-04', 75, 2258851613, 9727069093, '344 Claremont Pass', 'asoreau44@prlog.org', '', 'Arly Soreau', 9137471246, 13),
+(412223, 'Adrianna', 'Le Estut', '1956-03-09', 65, 5091844828, 5817271147, '2 Twin Pines Court', 'ale38@lycos.com', '', 'Adrianna Le Estut', 3328959754, 8),
+(412465, 'Federico', 'Hurn', '1951-07-28', 54, 7965457308, 2092269078, '26 Manufacturers Court', 'fhurn23@scribd.com', '', 'Federico Hurn', 6489186355, 20),
+(419464, 'Pandora', 'Astill', '1928-07-27', 50, 6846722437, 1733044837, '70407 Upham Crossing', 'pastill1p@biglobe.ne.jp', '', 'Pandora Astill', 6588153974, 19),
+(425591, 'Federico', 'Kuzemka', '1910-02-09', 59, 5195941441, 7599395417, '5322 Lawn Avenue', 'fkuzemka2f@loc.gov', '', 'Federico Kuzemka', 4458362834, 9),
+(426712, 'Galvan', 'Linzee', '1909-05-16', 66, 8197475232, 3708059673, '61 Talisman Avenue', 'glinzee3e@ocn.ne.jp', '', 'Galvan Linzee', 8992025930, 7),
+(428542, 'Darb', 'Kettlesting', '1946-01-29', 57, 2911985514, 6043617653, '801 Algoma Pass', 'dkettlesting26@howstuffworks.com', '', 'Darb Kettlesting', 7498070350, 16),
+(434057, 'Sibilla', 'Kidston', '1914-02-03', 52, 9325861353, 9419283939, '1 Lakewood Drive', 'skidston3k@stumbleupon.com', '', 'Sibilla Kidston', 6653574393, 8),
+(442812, 'Garik', 'Carlos', '1907-08-21', 20, 7714762516, 1777812518, '6445 Summit Court', 'gcarlos4@hhs.gov', '', 'Garik Carlos', 3873633872, 6),
+(444215, 'Star', 'Bohan', '1909-08-21', 53, 9448600804, 5944592828, '2172 Algoma Terrace', 'sbohan3x@indiatimes.com', '', 'Star Bohan', 1289761827, 9),
+(445992, 'Isaak', 'Donahue', '1938-08-17', 7, 1806039901, 2247776623, '7 Vernon Place', 'idonahue2h@google.it', '', 'Isaak Donahue', 7122933036, 20),
+(458729, 'Tammie', 'Whymark', '1927-06-20', 59, 3127944115, 9309592947, '01434 Maywood Hill', 'twhymark1z@imageshack.us', '', 'Tammie Whymark', 7772420608, 8),
+(462922, 'Ernesto', 'Cutriss', '1949-05-07', 24, 9023479829, 1677086572, '64091 Boyd Parkway', 'ecutrissq@kickstarter.com', '', 'Ernesto Cutriss', 2795394698, 9),
+(465515, 'Faydra', 'Askham', '1965-10-04', 76, 6669279547, 7022394397, '9 Golf Course Pass', 'faskhamk@bandcamp.com', '', 'Faydra Askham', 2357713510, 11),
+(471015, 'Kizzee', 'April', '1927-03-05', 69, 8054995321, 6283761406, '9 Hovde Plaza', 'kaprils@cnet.com', '', 'Kizzee April', 5121028605, 7),
+(471413, 'Fax', 'Massinger', '1976-11-09', 65, 9243140000, 6643718356, '40973 Hayes Street', 'fmassinger3@qq.com', '', 'Fax Massinger', 9887809966, 13),
+(481772, 'Dane', 'Skillern', '1944-01-08', 62, 8109838428, 7292525991, '3 Dunning Avenue', 'dskillern1l@columbia.edu', '', 'Dane Skillern', 7962288009, 14),
+(500242, 'Clarie', 'Lett', '1967-05-28', 33, 5576700079, 3348443260, '373 Arkansas Center', 'clett3o@about.me', '', 'Clarie Lett', 1007263350, 6),
+(507207, 'Kial', 'Compton', '1929-12-26', 6, 4513217440, 7879437343, '3927 Portage Hill', 'kcompton2k@github.io', '', 'Kial Compton', 4048195333, 5),
+(510510, 'Ddene', 'Vost', '1917-11-03', 75, 4374689247, 8479486222, '764 Corscot Parkway', 'dvost4x@usda.gov', '', 'Ddene Vost', 2603424930, 1),
+(510872, 'Bessie', 'McPharlain', '1905-06-06', 59, 6168718018, 7808631360, '3 Fordem Junction', 'bmcpharlain5i@cyberchimps.com', '', 'Bessie McPharlain', 2001489847, 5),
+(513737, 'Willette', 'Fleay', '1932-09-17', 70, 7507996327, 9557161719, '4236 Roxbury Junction', 'wfleay4r@narod.ru', '', 'Willette Fleay', 7328963630, 10),
+(518451, 'Miller', 'Wollaston', '1971-01-28', 26, 5074259710, 5571507212, '1880 Hoepker Junction', 'mwollaston3z@ow.ly', '', 'Miller Wollaston', 1291164631, 14),
+(524119, 'Nady', 'Brydone', '1956-04-17', 67, 7179406802, 5123699323, '99141 Golden Leaf Parkway', 'nbrydone9@jiathis.com', '', 'Nady Brydone', 7054607893, 4),
+(525414, 'Netty', 'Fendlen', '1903-01-20', 67, 2072800013, 8822057616, '475 Goodland Point', 'nfendlen4d@ehow.com', '', 'Netty Fendlen', 4302826012, 3),
+(531953, 'Christina', 'Becraft', '1953-04-27', 21, 7923738468, 3293519622, '90 Forest Run Center', 'cbecraft1j@aboutads.info', '', 'Christina Becraft', 4663992998, 9),
+(544453, 'Moises', 'Karpets', '1940-12-19', 62, 2925639554, 4298906574, '1 Gateway Pass', 'mkarpets3a@imgur.com', '', 'Moises Karpets', 1467783457, 13),
+(546804, 'Rogers', 'Robens', '1914-08-08', 73, 5703294513, 7937979226, '04 Farmco Park', 'rrobensw@pbs.org', '', 'Rogers Robens', 9902876393, 14),
+(549910, 'Cele', 'Kadd', '1903-06-03', 72, 3209679266, 5677208640, '60 Prentice Park', 'ckadd2@t-online.de', '', 'Cele Kadd', 4716166835, 7),
+(550958, 'Tammi', 'Keiling', '1908-04-13', 47, 8515588911, 6809948781, '21672 Monument Way', 'tkeiling1k@ifeng.com', '', 'Tammi Keiling', 6689641555, 13),
+(571616, 'Melvin', 'Ebden', '1973-06-01', 48, 2457820073, 9949741670, '51478 Ilene Circle', 'mebden3f@seesaa.net', '', 'Melvin Ebden', 4695425335, 14),
+(576813, 'Arvy', 'Spino', '1936-02-12', 28, 2486321991, 4365918072, '636 Veith Street', 'aspino3t@wikia.com', '', 'Arvy Spino', 1213047780, 3),
+(578644, 'Drud', 'Szimoni', '1950-05-06', 68, 4062818975, 9544244961, '0 Waywood Trail', 'dszimoni2i@bloglines.com', '', 'Drud Szimoni', 9451922760, 6),
+(583177, 'Bartolemo', 'Sandercock', '1931-03-25', 10, 8777706435, 6362681668, '33058 Fuller Avenue', 'bsandercock4t@psu.edu', '', 'Bartolemo Sandercock', 7001990812, 3),
+(589733, 'Valina', 'Mellings', '1974-01-13', 42, 1321000852, 3077565912, '36 Talisman Street', 'vmellingsv@yolasite.com', '', 'Valina Mellings', 8554551555, 16),
+(592763, 'Carry', 'Frodsam', '1945-07-04', 44, 5906296569, 8759815133, '88 Mesta Alley', 'cfrodsam1@vinaora.com', '', 'Carry Frodsam', 6228914498, 17),
+(592926, 'Gordan', 'Joberne', '1973-02-21', 29, 8509965220, 5266274140, '844 Sullivan Lane', 'gjoberne27@stumbleupon.com', '', 'Gordan Joberne', 4171944506, 1),
+(600421, 'Moore', 'Lacasa', '1911-02-06', 49, 4147495703, 8477506624, '0290 Roxbury Center', 'mlacasat@sitemeter.com', '', 'Moore Lacasa', 8052039846, 19),
+(620398, 'Gunther', 'McLarens', '1934-06-04', 49, 4243353135, 5503943605, '13971 Rieder Alley', 'gmclarens30@livejournal.com', '', 'Gunther McLarens', 8846196760, 3),
+(631524, 'Dulciana', 'Agus', '1943-12-08', 13, 7171986865, 4456160111, '23734 Schurz Alley', 'dagus8@google.de', '', 'Dulciana Agus', 6712405488, 3),
+(634372, 'Freeland', 'Sokell', '1965-01-03', 61, 9186108842, 4218448110, '30897 Jana Point', 'fsokellb@cdc.gov', '', 'Freeland Sokell', 2103997610, 5),
+(650538, 'Jacinta', 'Tanzig', '1933-03-15', 68, 3196349591, 4424046867, '09 Tony Parkway', 'jtanzig2d@admin.ch', '', 'Jacinta Tanzig', 5322470971, 1),
+(656678, 'Maisey', 'Tubbs', '1967-12-14', 30, 3873737993, 1567589810, '607 Sherman Point', 'mtubbs1y@discovery.com', '', 'Maisey Tubbs', 6936607699, 17),
+(660800, 'Trudie', 'Troup', '1925-05-10', 32, 3085674560, 8421452204, '444 Merchant Road', 'ttroupl@topsy.com', '', 'Trudie Troup', 9768852774, 1),
+(662815, 'Rowan', 'MacIllrick', '1964-10-29', 73, 8792201216, 7085132011, '753 Dottie Junction', 'rmacillrick31@123-reg.co.uk', '', 'Rowan MacIllrick', 3079834511, 20),
+(672072, 'Siward', 'Baugh', '1945-08-01', 48, 8984934956, 8152934232, '743 Mallory Pass', 'sbaugh5d@yahoo.co.jp', '', 'Siward Baugh', 3015871455, 6),
+(675015, 'Gabbi', 'Towne', '1975-07-29', 64, 8375478435, 1957853098, '7 Gateway Drive', 'gtowne3d@ehow.com', '', 'Gabbi Towne', 6116789399, 4),
+(677802, 'Brannon', 'Burris', '1922-11-10', 28, 3467897576, 2347354384, '744 Fisk Parkway', 'bburris2w@flavors.me', '', 'Brannon Burris', 8375958031, 11),
+(678482, 'Clemence', 'Brayley', '1909-12-31', 7, 4835190585, 7687114186, '248 5th Avenue', 'cbrayley33@columbia.edu', '', 'Clemence Brayley', 3363193985, 18),
+(689989, 'Annaliese', 'Fills', '1969-12-10', 55, 3384284990, 8007877361, '605 Bay Trail', 'afills1b@java.com', '', 'Annaliese Fills', 6501989511, 5),
+(693748, 'Melloney', 'Shawcroft', '1958-02-01', 32, 7608720602, 3302435912, '19242 Tony Road', 'mshawcroft4s@earthlink.net', '', 'Melloney Shawcroft', 9825369993, 16),
+(701725, 'Earl', 'Malmar', '1941-02-18', 37, 4276785448, 6446904402, '6574 Melrose Place', 'emalmar5b@php.net', '', 'Earl Malmar', 6039394644, 13),
+(704926, 'Marcus', 'Comiam', '1971-03-02', 74, 3102019381, 1037677529, '583 Oxford Plaza', 'mcomiam3b@theglobeandmail.com', '', 'Marcus Comiam', 2014087282, 20),
+(711325, 'Aidan', 'Knobell', '1948-05-21', 76, 4555722257, 8146601149, '96 Algoma Pass', 'aknobellj@odnoklassniki.ru', '', 'Aidan Knobell', 7882902738, 16),
+(718815, 'Ezra', 'Harnetty', '1958-03-02', 14, 5574895331, 5231680070, '3955 Springs Alley', 'eharnetty57@pagesperso-orange.fr', '', 'Ezra Harnetty', 8828217035, 20),
+(721168, 'Roxine', 'Glabach', '1925-10-07', 5, 7911031177, 2517902506, '1 7th Court', 'rglabach4q@kickstarter.com', '', 'Roxine Glabach', 3195443672, 3),
+(724917, 'Rufus', 'Winley', '1932-09-29', 21, 6576876901, 6834799252, '3849 Mcguire Junction', 'rwinley37@un.org', '', 'Rufus Winley', 6337232941, 20),
+(727812, 'Sherwin', 'Roll', '1973-03-11', 13, 9542401610, 4404660492, '0976 Morrow Crossing', 'sroll4v@tripadvisor.com', '', 'Sherwin Roll', 4607566899, 6),
+(729260, 'Pammy', 'Spillett', '1960-02-12', 58, 9398261880, 3339510928, '972 Merrick Street', 'pspillett39@washingtonpost.com', '', 'Pammy Spillett', 1054573652, 19),
+(730710, 'Tedda', 'de Quincey', '1958-05-24', 10, 2437942613, 3068762890, '1 Farragut Pass', 'tde19@naver.com', '', 'Tedda de Quincey', 4216607133, 7),
+(738093, 'Sela', 'Jaszczak', '1923-11-29', 37, 4028100702, 9668911342, '2 Old Gate Terrace', 'sjaszczakd@epa.gov', '', 'Sela Jaszczak', 7776159232, 19),
+(744181, 'Tamqrah', 'Sinden', '1956-10-12', 62, 4983254287, 9148355065, '062 Johnson Court', 'tsinden1h@slideshare.net', '', 'Tamqrah Sinden', 2061971711, 1),
+(749528, 'Candice', 'Mainland', '1976-01-07', 38, 9187422619, 7269874979, '08072 Portage Place', 'cmainland3j@ehow.com', '', 'Candice Mainland', 5449011627, 19),
+(752554, 'Ezequiel', 'Hooks', '1908-11-02', 31, 7051493108, 9812855872, '666 Parkside Lane', 'ehooks5c@slate.com', '', 'Ezequiel Hooks', 6133398909, 17),
+(758239, 'Gusti', 'Hrachovec', '1939-12-01', 32, 4516415301, 5959333187, '6381 Heath Junction', 'ghrachovec2z@infoseek.co.jp', '', 'Gusti Hrachovec', 1428158247, 8),
+(763626, 'Dynah', 'Edinburgh', '1937-08-23', 58, 4199485836, 4696688807, '8 Jackson Alley', 'dedinburgh11@hostgator.com', '', 'Dynah Edinburgh', 3094883706, 17),
+(774507, 'Coralyn', 'Bacon', '1936-08-19', 18, 2238774451, 9388339243, '3 Carpenter Way', 'cbacon1g@ebay.co.uk', '', 'Coralyn Bacon', 9599590424, 10),
+(776265, 'Torey', 'Reade', '1970-05-12', 61, 6458642051, 9379576339, '7511 Alpine Pass', 'treade43@nymag.com', '', 'Torey Reade', 3793221441, 4),
+(781005, 'Thomasin', 'Walkowski', '1952-10-13', 52, 9384594820, 7424671213, '13459 Coolidge Crossing', 'twalkowski1n@oakley.com', '', 'Thomasin Walkowski', 9065642766, 11),
+(783394, 'Nisse', 'Tedridge', '1947-05-31', 54, 8861535109, 2533861835, '018 Anderson Point', 'ntedridge4k@alexa.com', '', 'Nisse Tedridge', 6194940875, 9),
+(786399, 'Boy', 'Emps', '1954-01-04', 46, 3604651832, 1568475063, '2 Crescent Oaks Center', 'bemps1d@shop-pro.jp', '', 'Boy Emps', 7412073678, 20),
+(789464, 'Krysta', 'Finders', '1976-01-06', 6, 2003855927, 6144556185, '6 Stephen Court', 'kfinders4j@jiathis.com', '', 'Krysta Finders', 8616101310, 11),
+(800913, 'Ruby', 'Curthoys', '1930-02-07', 74, 3837535955, 8923946211, '53403 Cordelia Pass', 'rcurthoys21@ihg.com', '', 'Ruby Curthoys', 8702064450, 16),
+(806190, 'Caryl', 'Jerome', '1961-10-19', 79, 7224848920, 8848923485, '344 Loeprich Trail', 'cjerome1i@squidoo.com', '', 'Caryl Jerome', 9571060022, 20),
+(814696, 'Katine', 'Hartop', '1927-09-03', 50, 1389874622, 1766599329, '77583 Anderson Hill', 'khartop2t@psu.edu', '', 'Katine Hartop', 7844240112, 12),
+(818817, 'Falkner', 'Houldcroft', '1968-11-02', 44, 2757185773, 6861703192, '0048 Lotheville Road', 'fhouldcroftn@cocolog-nifty.com', '', 'Falkner Houldcroft', 6673132008, 1),
+(833748, 'Rachel', 'Dyment', '1902-02-26', 38, 3832882916, 4577239829, '94 Hagan Terrace', 'rdymentr@sogou.com', '', 'Rachel Dyment', 7415549722, 4),
+(839309, 'Gris', 'Metrick', '1952-04-26', 18, 3451498773, 7823818144, '1 8th Street', 'gmetrick4z@reuters.com', '', 'Gris Metrick', 6128836788, 4),
+(849110, 'Willem', 'Cabera', '1978-11-25', 40, 5627799954, 7272343012, '60 Gateway Crossing', 'wcabera2n@google.co.jp', '', 'Willem Cabera', 7919120139, 16),
+(850785, 'Shara', 'Gladhill', '1920-05-02', 53, 7314421976, 6472082431, '47001 Namekagon Place', 'sgladhill1f@reference.com', '', 'Shara Gladhill', 2809520273, 15),
+(851165, 'Bryana', 'Mawhinney', '1951-11-01', 64, 1262210564, 1914507801, '5592 New Castle Circle', 'bmawhinney36@sourceforge.net', '', 'Bryana Mawhinney', 8737425793, 4),
+(860032, 'Linnea', 'Canedo', '1961-09-02', 40, 9538045856, 7743389881, '4794 Butterfield Hill', 'lcanedo20@ameblo.jp', '', 'Linnea Canedo', 9809136636, 4),
+(860209, 'Malachi', 'Lidgett', '1972-07-18', 69, 8648330848, 4465834316, '5579 Havey Lane', 'mlidgettg@uol.com.br', '', 'Malachi Lidgett', 3521133687, 6),
+(867677, 'Mia', 'De Ruggero', '1912-05-10', 22, 4192087502, 8382874965, '1 Prairieview Terrace', 'mde48@friendfeed.com', '', 'Mia De Ruggero', 8544080673, 18),
+(868350, 'Vally', 'Dunlop', '1950-07-07', 24, 5435706584, 1654211607, '3190 Lillian Plaza', 'vdunloph@umn.edu', '', 'Vally Dunlop', 8596086908, 11),
+(871889, 'Noni', 'Roggerone', '1941-03-11', 49, 1041225615, 6454233501, '20117 Grover Point', 'nroggerone4l@hc360.com', '', 'Noni Roggerone', 2935558081, 16),
+(875313, 'Olivero', 'Bampton', '1959-03-22', 65, 3264022851, 6338681683, '6466 Vera Pass', 'obampton2e@pen.io', '', 'Olivero Bampton', 1059683474, 11),
+(877502, 'Tilly', 'Ricketts', '1973-04-23', 76, 3024392448, 3005964668, '82 Chive Road', 'tricketts3s@va.gov', '', 'Tilly Ricketts', 7487733360, 16),
+(878478, 'Harmonie', 'Lowmass', '1923-07-13', 39, 8838138744, 5722617433, '0 Sheridan Crossing', 'hlowmassc@twitpic.com', '', 'Harmonie Lowmass', 8137158560, 17),
+(879836, 'Floris', 'Castells', '1938-01-08', 73, 9527585916, 4368490685, '29 Sheridan Court', 'fcastells28@biblegateway.com', '', 'Floris Castells', 9283669128, 14),
+(879981, 'Hillel', 'Snary', '1948-01-03', 40, 3988021370, 6939715226, '46823 Corry Terrace', 'hsnary3h@hexun.com', '', 'Hillel Snary', 7967583997, 17),
+(880876, 'Nathanial', 'Pitcock', '1960-08-09', 66, 7524013606, 4381670168, '615 Spenser Drive', 'npitcocko@constantcontact.com', '', 'Nathanial Pitcock', 5331642527, 10),
+(888274, 'Tad', 'Phillps', '1941-11-07', 69, 7696375866, 2592005916, '69396 Elmside Park', 'tphillps2r@nba.com', '', 'Tad Phillps', 3813889595, 19),
+(890887, 'Thomasa', 'Minty', '1962-02-17', 21, 4499851537, 7291753934, '68 Continental Terrace', 'tminty34@aboutads.info', '', 'Thomasa Minty', 1527174378, 16),
+(896600, 'Abe', 'Pudney', '1921-09-19', 56, 7646457779, 2587850756, '4255 Dayton Alley', 'apudney1v@nationalgeographic.com', '', 'Abe Pudney', 2534704818, 19),
+(896626, 'Nevile', 'Kennifick', '1956-03-24', 17, 4694410784, 3893802591, '7142 Fisk Crossing', 'nkennifick3c@whitehouse.gov', '', 'Nevile Kennifick', 8321502471, 8),
+(896882, 'Ado', 'Tocknell', '1968-12-19', 62, 1518369313, 4601625177, '087 Springview Place', 'atocknell3v@wordpress.org', '', 'Ado Tocknell', 6558043875, 16),
+(900851, 'Josselyn', 'Feasby', '1906-02-01', 78, 2447127215, 6499206962, '494 Maywood Road', 'jfeasby5j@delicious.com', '', 'Josselyn Feasby', 5857642294, 1),
+(904347, 'Lief', 'Joburn', '1921-04-19', 30, 8078543644, 6737934240, '36 Manufacturers Terrace', 'ljoburn4o@dell.com', '', 'Lief Joburn', 7782776618, 16),
+(913750, 'Genni', 'Cursey', '1957-06-10', 11, 2228510151, 4127595063, '2 Ruskin Hill', 'gcursey2a@stumbleupon.com', '', 'Genni Cursey', 3366014192, 13),
+(921822, 'Derwin', 'Marshman', '1902-12-02', 51, 4583968475, 9653512954, '8 Debra Hill', 'dmarshman15@spotify.com', '', 'Derwin Marshman', 5381067017, 11),
+(926994, 'Hector', 'Vaissiere', '1949-01-04', 53, 5453078367, 3597966731, '872 Clyde Gallagher Junction', 'hvaissiere40@whitehouse.gov', '', 'Hector Vaissiere', 8061739513, 18),
+(931767, 'Woodie', 'Turley', '1936-12-12', 50, 3224870954, 4419137324, '08422 Wayridge Drive', 'wturley1o@home.pl', '', 'Woodie Turley', 3024506040, 10),
+(934250, 'Stacia', 'Marron', '1980-05-30', 55, 2458980461, 4907410189, '9 5th Road', 'smarron3q@aboutads.info', '', 'Stacia Marron', 6605417812, 5),
+(938082, 'Sophey', 'Tewkesbury', '1915-11-29', 9, 3871853090, 7484028936, '0 Basil Point', 'stewkesbury1u@yolasite.com', '', 'Sophey Tewkesbury', 4746936119, 14),
+(942368, 'Bunny', 'Mundford', '1951-07-01', 79, 7469879020, 4572782771, '45237 Golf Way', 'bmundford2p@wikipedia.org', '', 'Bunny Mundford', 2494818887, 8),
+(942513, 'Georgianne', 'Cadany', '1960-12-21', 77, 9722839265, 1878282713, '96146 Coleman Street', 'gcadany3g@intel.com', '', 'Georgianne Cadany', 5092773487, 8),
+(942886, 'Caitlin', 'Dubois', '1905-05-03', 50, 2088046447, 1268348318, '6955 Norway Maple Place', 'cdubois17@booking.com', '', 'Caitlin Dubois', 7005655842, 19),
+(951861, 'Marian', 'Brunnstein', '1915-09-20', 58, 5084677285, 7371612461, '73 Lawn Junction', 'mbrunnsteinx@google.com.hk', '', 'Marian Brunnstein', 9514565622, 17),
+(958210, 'Cameron', 'Flement', '1969-09-20', 22, 6374673681, 2258522240, '2 Russell Crossing', 'cflement35@last.fm', '', 'Cameron Flement', 9592518987, 19),
+(960814, 'Toni', 'Bydaway', '1948-08-09', 38, 2093550967, 4027699942, '5576 7th Drive', 'tbydaway49@slate.com', '', 'Toni Bydaway', 1924082777, 16),
+(973263, 'Cyrill', 'Mordey', '1943-02-16', 45, 1914072016, 1355077393, '094 8th Way', 'cmordey4m@squidoo.com', '', 'Cyrill Mordey', 1253774691, 3),
+(976959, 'Retha', 'Parminter', '1942-09-30', 70, 4709502866, 5302202987, '43 Transport Alley', 'rparminter5@domainmarket.com', '', 'Retha Parminter', 3065686233, 19),
+(979600, 'Arch', 'Mateev', '1937-06-02', 72, 1626485271, 2423017653, '4 Russell Avenue', 'amateev1s@gmpg.org', '', 'Arch Mateev', 2736559167, 10),
+(980645, 'Daryle', 'Chatfield', '1918-04-15', 66, 2925289312, 2758935096, '0463 Veith Drive', 'dchatfielde@gravatar.com', '', 'Daryle Chatfield', 4703672417, 11),
+(989744, 'Arleta', 'Pridgeon', '1955-06-20', 12, 7173968942, 2308366302, '064 Everett Crossing', 'apridgeon3n@pcworld.com', '', 'Arleta Pridgeon', 5702083915, 9),
+(996210, 'Rivy', 'Peat', '1911-03-12', 46, 4356824063, 9964196365, '152 Paget Lane', 'rpeat4g@flavors.me', '', 'Rivy Peat', 7467480264, 7),
+(998016, 'Niall', 'Menci', '1905-07-11', 79, 3645785141, 9542882739, '2 Steensland Road', 'nmenciy@deliciousdays.com', '', 'Niall Menci', 9584818991, 2),
+(998742, 'Kailey', 'Chasteney', '1974-01-03', 35, 7323861703, 7906883242, '7035 Westport Pass', 'kchasteney7@barnesandnoble.com', '', 'Kailey Chasteney', 4389528802, 20),
+(998743, 'Hector', 'CAUDEVILAASDA', '2024-08-14', 43, 28428876, 3513328786, 'Córdoba', 'hectorcaudevila@gmail.com', 'sa', 'Lorena D', 9999999999, 8),
+(998744, 'Diego Armando', 'Maradona', '0000-00-00', 10, 14276579, 2312312121, 'Segurola y Habana', 'latenes@adentro.com', '', '', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `id` int(11) NOT NULL,
+  `usuario` varchar(50) NOT NULL,
+  `contraseña` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `usuario`, `contraseña`) VALUES
+(1, 'admin123', '$2y$10$Te.TGFXVobsRJvE39GCHIuUnNGgc5AF3smg0U2nt6nzCpQNeaIq7u'),
+(2, 'adminprueba', '$2y$10$IgW1DerI8UixWmq05nMefOncEyvDyQkXLnjt6R1L.9RaVfwPTrKWi'),
+(3, 'adminclub', '$2y$10$WKQQxXs1DjvshAED7UGsBeYMeC2qv5ihBVTnAoEd6Nw.92mhSXljm'),
+(4, 'adminsarmiento', 'adminsarmiento123');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `disciplinas`
+--
+ALTER TABLE `disciplinas`
+  ADD PRIMARY KEY (`id_disciplina`);
+
+--
+-- Indices de la tabla `pagos`
+--
+ALTER TABLE `pagos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_socio` (`id_socio`),
+  ADD KEY `id_disciplina` (`id_disciplina`);
+
+--
+-- Indices de la tabla `socios`
+--
+ALTER TABLE `socios`
+  ADD PRIMARY KEY (`SocioID`),
+  ADD UNIQUE KEY `DNI` (`DNI`);
+
+--
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `usuario` (`usuario`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `disciplinas`
+--
+ALTER TABLE `disciplinas`
+  MODIFY `id_disciplina` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT de la tabla `pagos`
+--
+ALTER TABLE `pagos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+
+--
+-- AUTO_INCREMENT de la tabla `socios`
+--
+ALTER TABLE `socios`
+  MODIFY `SocioID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=998745;
+
+--
+-- AUTO_INCREMENT de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `pagos`
+--
+ALTER TABLE `pagos`
+  ADD CONSTRAINT `pagos_ibfk_1` FOREIGN KEY (`id_socio`) REFERENCES `socios` (`SocioID`),
+  ADD CONSTRAINT `pagos_ibfk_2` FOREIGN KEY (`id_disciplina`) REFERENCES `disciplinas` (`id_disciplina`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
