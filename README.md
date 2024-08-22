@@ -40,7 +40,7 @@ Configura la base de datos:
 - Importa el archivo club_sarmiento.sql que contiene la estructura y datos iniciales de la base de datos.
 - Instala dependencias con Composer:
 
-Composer manejo de reportes y exportacion a excel)
+Composer manejo de reportes y exportar reportes con excel
 
 Navega a la carpeta del proyecto y ejecuta:
 
